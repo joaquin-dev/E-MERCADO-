@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)https://getbootstrap.com/docs/4.3/examples/album/ -->
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <title>eMercado - Todo lo que busques está aquí</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
+
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+  <link href="css/dropzone.css" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="site-header sticky-top py-1 bg-dark">
+    <div class="container d-flex flex-column flex-md-row justify-content-between">
+      <a class="py-2 d-none d-md-inline-block" href="index.html">Inicio</a>
+      <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
+      <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
+      <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
+      <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
+      <div id="generalButton">
+      </div>
+    </div>
+    </div>
+  </nav>
+  
+  <div id="tituloCompra">
+    <p id="compra"> <img src="img/cart.png" alt="">Mi Compra</p>
+  </div>
+  <div class="container p-5" id="listaProductos">
+ <table id="tableProducts">
+   <tr>
+    <td class="headerCart">Producto</td>
+    <td class="headerCart">Precio unitario</td>
+    <td id="cantCol" class="headerCart">Cantidad</td>
+    <td class="headerCart">Moneda</td>
+    <td class="headerCart">Subtotal</td>
+   </tr>
+ </table>
+ 
+ <label id="totalCart">Total del carrito: </label>
+  </div>
+
+  <!-- Formulario para datos y modal -->
+
+    <p id="tituloformcart">Datos de pago y envío</p>
+    <form id="cartform" name="cartform" action="" method="POST">
+      
+      <label for="envio">Tipo de envío: </label>
+      <select id="envio" name="envío" required>
+        <option value="standard">Standard</option>
+        <option value="express">Express</option>
+        <option value="premium">Premium</option>
+      </select>
+      <br>
+
+
+      <label class="labelenvio" for="pais">País: </label>
+      <input type="text" id="pais" class="labelenvio" name="pais" required>
+      <br>
+      <label class="labelenvio" for="calle">Calle: </label>
+      <input type="text" id="calle" class="labelenvio" name="calle" required>
+      <br>
+      <label class="labelenvio" for="nro">Número: </label>
+      <input type="number" id="nro" class="labelenvio" name="nro" min="0" required>
+      <br>
+      <label class="labelenvio" for="esquina">Esquina: </label>
+      <input type="text" id="esquina" class="labelenvio" name="esquina" required>
+      <hr color="gray">
+
+      <p id="dias" class="infoenvio"></p>
+      <p id="costo" class="infoenvio"></p>
+      <p id="costofinal">Total de la compra: </p>
+
+      <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Forma de pago</button>
+      <button id="finalizarcompra" type="submit" class="btn btn-primary" data-dismiss="modal">Finalizar Compra</button>
+      <!-- Start Modal -->
+      <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <h4 class="modal-title">Formas de pago</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+              <input id="tarjeta" type="radio" name="pago" onclick="chequear()"> Tarjeta de crétido
+                <hr>
+                
+                <label for="tarjetas">Opciones de tarjeta: </label>
+                <select id="tarjetas" name="tarjetas">
+                  <option value="mastercard">Mastercad</option>
+                  <option value="express">OCA</option>
+                  <option value="premium">Santander</option>
+                </select>
+                <br>
+                
+                <label class="negrita" for="serie">Número de serie: </label>
+                <input id="serie" name="nroserie" type="text" placeholder="Ej: xxxx xxxx xxxx xxxx" maxlength="18">
+                <label class="negrita" for="codseg">Código de seguridad: </label>
+                <input id="codseg" name="codseg" type="text" maxlength="3">
+                <label class="negrita" for="fecha">Fecha de vencimiento: </label>
+                <input id="fecha" name="fecha" type="text" placeholder="MM/YYYY">
+                <hr>
+                
+                <input id="transferencia" type="radio" name="pago" onclick="chequear()">Transferencia bancaria
+                <hr>
+
+                <label class="negrita" for="nrocuenta">Número de cuenta: </label>
+                <input id="nrocuenta" name="nrocuenta" type="text">
+              </div>
+
+            <div class="modal-footer">
+              <button id="aceptarcart" type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Modal -->
+    </form>
+  <div id="spinner-wrapper">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/dropzone.js"></script>
+  <script src="js/init.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+</html>
